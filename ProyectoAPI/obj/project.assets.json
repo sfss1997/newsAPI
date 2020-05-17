@@ -8581,11 +8581,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\ProyectoAPI\\ProyectoAPI.csproj",
+      "projectUniqueName": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\newsAPI\\ProyectoAPI\\ProyectoAPI.csproj",
       "projectName": "ProyectoAPI",
-      "projectPath": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\ProyectoAPI\\ProyectoAPI.csproj",
+      "projectPath": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\newsAPI\\ProyectoAPI\\ProyectoAPI.csproj",
       "packagesPath": "C:\\Users\\fabian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\ProyectoAPI\\obj\\",
+      "outputPath": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\newsAPI\\ProyectoAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\fabian\\AppData\\Roaming\\NuGet\\NuGet.Config",

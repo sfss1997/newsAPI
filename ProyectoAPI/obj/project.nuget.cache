@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LVElUPio0THRJpeat1kQ1FleweNcMOa4pjHY2VGq8caMMqZ9XzrA5jD/preJdi/9+Y2CoXeoUbVXAfoIsz7QgA==",
+  "dgSpecHash": "auql3s1SpE81pKfpnVGTeSPgGMOzB0Sqkl5X6B4z4b871Fb6Ts613lyLLnCNk3w9gMwQRm1sms86PxOFN8FKVA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\ProyectoAPI\\ProyectoAPI.csproj",
+  "projectFilePath": "C:\\Users\\fabian\\Desktop\\UCR\\quinto\\lenguajes\\newsAPI\\ProyectoAPI\\ProyectoAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fabian\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\fabian\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

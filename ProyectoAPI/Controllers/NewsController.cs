@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.Data.SqlClient;
 
-
 namespace ProyectoAPI.Controllers
 {
 
@@ -51,9 +50,9 @@ namespace ProyectoAPI.Controllers
             var Text = new SqlParameter("@Text", news.Text);
             var Title = new SqlParameter("@Title", news.Title);
 
-            var newsResult = _context.News
-                 .FromSqlRaw($"InsertNews" + Title, Text, DateTime, AuthorName, AuthorId)
-                 .AsEnumerable();
+            var newsResult = _context.Database
+                 .ExecuteSqlRaw($"InsertNews" + Title, Text, DateTime, AuthorName, AuthorId);
+                
 
             return Ok(newsResult);
         }
