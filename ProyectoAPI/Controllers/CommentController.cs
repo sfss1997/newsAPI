@@ -15,7 +15,7 @@ namespace ProyectoAPI.Controllers
 
         [Route("[action]/{id}")]
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public ActionResult GetComment(int id)
         {
             var CommentID = new SqlParameter("@id", id);
             var news = _context.News
