@@ -41,18 +41,22 @@ namespace ProyectoAPI.Controllers
         }
 
         [Route("[action]")]
-        [HttpPut]
+        [HttpPost]
         public ActionResult InsertNews(News news)
         {
-            var AuthorId = new SqlParameter("@AuthorId", news.AuthorId);
-            var AuthorName = new SqlParameter("@AuthorName", news.AuthorName);
-            var DateTime = new SqlParameter("@DateTime", news.DateTime);
-            var Text = new SqlParameter("@Text", news.Text);
-            var Title = new SqlParameter("@Title", news.Title);
 
-            var newsResult = _context.Database
-                 .ExecuteSqlRaw($"InsertNews" + Title, Text, DateTime, AuthorName, AuthorId);
-                
+            var newsResult = _context.Database.ExecuteSqlRaw("InsertNews {0}, {1}, {2}, {3}, {4}",
+                news.AuthorId,
+                news.AuthorName,
+                news.DateTime,
+                news.Text,
+                news.Title
+                );
+
+            if (newsResult == 0)
+            {
+                return null;
+            }
 
             return Ok(newsResult);
         }

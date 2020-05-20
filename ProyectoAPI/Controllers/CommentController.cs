@@ -15,32 +15,34 @@ namespace ProyectoAPI.Controllers
 
         [Route("[action]/{id}")]
         [HttpGet("{id}")]
-        public ActionResult GetComment(int id)
+        public ActionResult GetCommentsByIdNews(int id)
         {
-            var CommentID = new SqlParameter("@id", id);
+            var CommentID = new SqlParameter("@NewsId", id);
             var news = _context.News
                  .FromSqlRaw($"SelectCommentById" + CommentID)
-                 .AsEnumerable();
+                 .AsEnumerable().ToList();
 
             return Ok(news);
         }
 
         [Route("[action]")]
-        [HttpPut]
+        [HttpPost]
         public ActionResult InsertComment(Comment comment)
         {
-            var NewsId = new SqlParameter("@NewsId", comment.NewsId);
-            var AuthorId = new SqlParameter("@AuthorId", comment.AuthorId);
-            var AuthorName = new SqlParameter("@AuthorName", comment.AuthorName);
-            var DateTime = new SqlParameter("@DateTime", comment.DateTime);
-            var Text = new SqlParameter("@Text", comment.Text);
 
+            var commentResult = _context.Database
+                 .ExecuteSqlRaw("InsertComment {0}, {1}, {2}, {3}, {4}" ,
+                 comment.AuthorId,
+                 comment.AuthorName,
+                 comment.DateTime,
+                 comment.Text,
+                 comment.NewsId);
 
-            var newsResult = _context.Database
-                 .ExecuteSqlRaw($"InsertComment" + Text + DateTime + AuthorName + AuthorId + NewsId);
-                 
-
-            return Ok(newsResult);
+            if (commentResult == 0)
+            {
+                return null;
+            }
+            return Ok(commentResult);
         }
 
     }
