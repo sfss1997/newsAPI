@@ -50,8 +50,7 @@ namespace ProyectoAPI.Controllers
                 news.AuthorName,
                 news.DateTime,
                 news.Text,
-                news.Title
-                );
+                news.Title);
 
             if (newsResult == 0)
             {
@@ -59,6 +58,40 @@ namespace ProyectoAPI.Controllers
             }
 
             return Ok(newsResult);
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public ActionResult UpdateNews(News news)
+        {
+
+            var newsResult = _context.Database.ExecuteSqlRaw("UpdateNews {0}, {1}, {2}, {3}, {4}, {5}",
+                news.Id,
+                news.AuthorId,
+                news.AuthorName,
+                news.DateTime,
+                news.Text,
+                news.Title);
+
+            if (newsResult == 0)
+            {
+                return null;
+            }
+
+            return Ok(newsResult);
+        }
+
+        [Route("[action]/{id}")]
+        [HttpDelete("{id}")]
+        public ActionResult DeleteNewsById(String id)
+        {
+            var NewsId = new SqlParameter("@id", id);
+            var result = _context.Database.ExecuteSqlRaw($"DeleteNews" + NewsId);
+            if (result == 0)
+            {
+                return null;
+            }
+            return Ok(result);
         }
     }
 }
