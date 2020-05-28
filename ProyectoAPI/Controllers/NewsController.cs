@@ -40,6 +40,18 @@ namespace ProyectoAPI.Controllers
             return Ok(news);
         }
 
+        [Route("[action]/{id}")]
+        [HttpGet("{id}")]
+        public ActionResult GetNewsById(int id)
+        {
+            var NewsId = new SqlParameter("@title", id);
+            var news = _context.News
+                 .FromSqlRaw($"SelectNewsById" + NewsId)
+                 .AsEnumerable().Single();
+
+            return Ok(news);
+        }
+
         [Route("[action]")]
         [HttpPost]
         public ActionResult InsertNews(News news)
@@ -83,7 +95,7 @@ namespace ProyectoAPI.Controllers
 
         [Route("[action]/{id}")]
         [HttpDelete("{id}")]
-        public ActionResult DeleteNewsById(String id)
+        public ActionResult DeleteNews(String id)
         {
             var NewsId = new SqlParameter("@id", id);
             var result = _context.Database.ExecuteSqlRaw($"DeleteNews" + NewsId);

@@ -45,5 +45,18 @@ namespace ProyectoAPI.Controllers
             return Ok(commentResult);
         }
 
+        [Route("[action]/{id}")]
+        [HttpDelete("{id}")]
+        public ActionResult DeleteComment(String id)
+        {
+            var CommentId = new SqlParameter("@id", id);
+            var result = _context.Database.ExecuteSqlRaw($"DeleteComment" + CommentId);
+            if (result == 0)
+            {
+                return null;
+            }
+            return Ok(result);
+        }
+
     }
 }
