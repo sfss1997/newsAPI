@@ -14,7 +14,7 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        _2020_IF4101PICES_B2Context _context = new _2020_IF4101PICES_B2Context();
+        _2020_IF4101PICESB2Context _context = new _2020_IF4101PICESB2Context();
 
 
         [Route("[action]")]
@@ -44,9 +44,9 @@ namespace ProyectoAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult GetNewsById(int id)
         {
-            var NewsId = new SqlParameter("@title", id);
+            var NewsId = new SqlParameter("@Id", id);
             var news = _context.News
-                 .FromSqlRaw($"SelectNewsById" + NewsId)
+                 .FromSqlRaw($"GetNewsById @Id" , NewsId)
                  .AsEnumerable().Single();
 
             return Ok(news);
@@ -54,15 +54,17 @@ namespace ProyectoAPI.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public ActionResult InsertNews(News news)
+        public IActionResult PostNews(News news)
         {
 
-            var newsResult = _context.Database.ExecuteSqlRaw("InsertNews {0}, {1}, {2}, {3}, {4}",
-                news.AuthorId,
-                news.AuthorName,
-                news.DateTime,
+            var newsResult = _context.Database.ExecuteSqlRaw("InsertUpdateNews {0}, {1}, {2}, {3}, {4}, {5}, {6}",
+                news.Id,
+                news.Title,
                 news.Text,
-                news.Title);
+                news.DateTime,
+                news.AuthorName,
+                news.AuthorId,
+                "Insert");
 
             if (newsResult == 0)
             {
@@ -73,17 +75,17 @@ namespace ProyectoAPI.Controllers
         }
 
         [Route("[action]")]
-        [HttpPost]
-        public ActionResult UpdateNews(News news)
+        [HttpPut]
+        public IActionResult PutNews(News news)
         {
-
-            var newsResult = _context.Database.ExecuteSqlRaw("UpdateNews {0}, {1}, {2}, {3}, {4}, {5}",
+            var newsResult = _context.Database.ExecuteSqlRaw("InsertUpdateNews {0}, {1}, {2}, {3}, {4}, {5}, {6}",
                 news.Id,
-                news.AuthorId,
-                news.AuthorName,
-                news.DateTime,
+                news.Title,
                 news.Text,
-                news.Title);
+                news.DateTime,
+                news.AuthorName,
+                news.AuthorId,
+                "Update");
 
             if (newsResult == 0)
             {
@@ -95,15 +97,16 @@ namespace ProyectoAPI.Controllers
 
         [Route("[action]/{id}")]
         [HttpDelete("{id}")]
-        public ActionResult DeleteNews(String id)
+        public ActionResult DeleteNews(int id)
         {
-            var NewsId = new SqlParameter("@id", id);
-            var result = _context.Database.ExecuteSqlRaw($"DeleteNews" + NewsId);
-            if (result == 0)
+            var NewsId = new SqlParameter("@Id", id);
+            var news = _context.News.FromSqlRaw($"DeleteNews @Id", NewsId);
+            
+            if (news == null)
             {
-                return null;
+                return NotFound();
             }
-            return Ok(result);
+            return Ok(news);
         }
     }
 }

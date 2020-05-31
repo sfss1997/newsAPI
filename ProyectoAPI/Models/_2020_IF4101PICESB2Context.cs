@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ProyectoAPI.Models
 {
-    public partial class _2020_IF4101PICES_B2Context : DbContext
+    public partial class _2020_IF4101PICESB2Context : DbContext
     {
-        public _2020_IF4101PICES_B2Context()
+        public _2020_IF4101PICESB2Context()
         {
         }
 
-        public _2020_IF4101PICES_B2Context(DbContextOptions<_2020_IF4101PICES_B2Context> options)
+        public _2020_IF4101PICESB2Context(DbContextOptions<_2020_IF4101PICESB2Context> options)
             : base(options)
         {
         }
@@ -23,7 +23,6 @@ namespace ProyectoAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseSqlServer("Data Source=163.178.173.148;Initial Catalog=2020_IF4101PICES_B2;User ID=estudiantesrp;Password=estudiantesrp");
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\Nicole;Initial Catalog=2020_IF4101PICESB2;Integrated Security=true");
             }
         }
@@ -32,13 +31,6 @@ namespace ProyectoAPI.Models
         {
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.AuthorId)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.AuthorName)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -50,6 +42,7 @@ namespace ProyectoAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Text)
+                    .IsRequired()
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
@@ -57,18 +50,11 @@ namespace ProyectoAPI.Models
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.NewsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Comment__NewsId__52593CB8");
+                    .HasConstraintName("FK__Comment__NewsId__5812160E");
             });
 
             modelBuilder.Entity<News>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.AuthorId)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.AuthorName)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -80,6 +66,7 @@ namespace ProyectoAPI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Text)
+                    .IsRequired()
                     .HasMaxLength(3000)
                     .IsUnicode(false);
 

@@ -17,9 +17,9 @@ namespace ProyectoAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult GetCommentsByIdNews(int id)
         {
-            var CommentID = new SqlParameter("@NewsId", id);
-            var news = _context.News
-                 .FromSqlRaw($"SelectCommentById" + CommentID)
+            var CommentID = new SqlParameter("@id", id);
+            var news = _context.Comment
+                 .FromSqlRaw($"SelectCommentById @id" , CommentID)
                  .AsEnumerable().ToList();
 
             return Ok(news);
@@ -27,15 +27,15 @@ namespace ProyectoAPI.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public ActionResult InsertComment(Comment comment)
+        public ActionResult PostComment(Comment comment)
         {
 
             var commentResult = _context.Database
                  .ExecuteSqlRaw("InsertComment {0}, {1}, {2}, {3}, {4}" ,
                  comment.AuthorId,
                  comment.AuthorName,
-                 comment.DateTime,
                  comment.Text,
+                 comment.DateTime,
                  comment.NewsId);
 
             if (commentResult == 0)
@@ -50,7 +50,7 @@ namespace ProyectoAPI.Controllers
         public ActionResult DeleteComment(String id)
         {
             var CommentId = new SqlParameter("@id", id);
-            var result = _context.Database.ExecuteSqlRaw($"DeleteComment" + CommentId);
+            var result = _context.Database.ExecuteSqlRaw($"DeleteComment @id" ,CommentId);
             if (result == 0)
             {
                 return null;
