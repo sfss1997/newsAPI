@@ -14,7 +14,7 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        _2020_IF4101PICESB2Context _context = new _2020_IF4101PICESB2Context();
+        _2020_IF4101PICES_B2Context _context = new _2020_IF4101PICES_B2Context();
 
 
         [Route("[action]")]

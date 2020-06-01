@@ -24,7 +24,8 @@ namespace ProyectoAPI.Models
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 //optionsBuilder.UseSqlServer("Data Source=163.178.173.148;Initial Catalog=2020_IF4101PICES_B2;User ID=estudiantesrp;Password=estudiantesrp");
-                optionsBuilder.UseSqlServer("Data Source=(localdb)\\Nicole;Initial Catalog=2020_IF4101PICESB2;Integrated Security=true");
+                //optionsBuilder.UseSqlServer("Data Source=(localdb)\\Nicole;Initial Catalog=2020_IF4101PICESB2;Integrated Security=true");
+                optionsBuilder.UseSqlServer("Data Source=163.178.107.10;Initial Catalog=2020_IF4101PICES_B2;User ID=laboratorios;Password=Saucr.118");
             }
         }
 
