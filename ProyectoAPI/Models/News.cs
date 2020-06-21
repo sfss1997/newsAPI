@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using WebAPILab.Converters;
 
 namespace ProyectoAPI.Models
 {
@@ -10,7 +12,10 @@ namespace ProyectoAPI.Models
             Comment = new HashSet<Comment>();
         }
 
+        [JsonConverter(typeof(IntToStringConverter))]
         public int Id { get; set; }
+
+        [JsonConverter(typeof(IntToStringConverter))]
         public int AuthorId { get; set; }
         public string AuthorName { get; set; }
         public string DateTime { get; set; }

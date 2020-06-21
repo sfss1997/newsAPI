@@ -26,6 +26,17 @@ namespace ProyectoAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("GetAllPolicy",
+                  builder =>
+                  {
+                      builder.WithOrigins("http://localhost:4200", "http://localhost:4200/news", "http://localhost:4200/comment")
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod();
+                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +50,8 @@ namespace ProyectoAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

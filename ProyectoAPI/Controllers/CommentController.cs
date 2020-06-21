@@ -4,15 +4,19 @@ using ProyectoAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace ProyectoAPI.Controllers
 {
     [Route("api/[controller]")]
+    [AllowAnonymous]
     [ApiController]
     public class CommentController : ControllerBase
     {
         _2020_IF4101PICES_B2Context _context = new _2020_IF4101PICES_B2Context();
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]/{id}")]
         [HttpGet("{id}")]
         public ActionResult GetCommentsByIdNews(int id)
@@ -25,6 +29,7 @@ namespace ProyectoAPI.Controllers
             return Ok(news);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]")]
         [HttpPost]
         public ActionResult PostComment(Comment comment)
@@ -45,6 +50,7 @@ namespace ProyectoAPI.Controllers
             return Ok(commentResult);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]/{id}")]
         [HttpDelete("{id}")]
         public ActionResult DeleteComment(int id)
@@ -58,6 +64,7 @@ namespace ProyectoAPI.Controllers
             return Ok(result);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]")]
         [HttpGet]
         public IActionResult GetComments()

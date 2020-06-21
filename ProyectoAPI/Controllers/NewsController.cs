@@ -5,18 +5,21 @@ using ProyectoAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace ProyectoAPI.Controllers
 {
 
 
     [Route("api/[controller]")]
+    [AllowAnonymous]
     [ApiController]
     public class NewsController : ControllerBase
     {
         _2020_IF4101PICES_B2Context _context = new _2020_IF4101PICES_B2Context();
 
-
+        [EnableCors("GetAllPolicy")]
         [Route("[action]")]
         [HttpGet]
         public IActionResult GetNews()
@@ -28,6 +31,7 @@ namespace ProyectoAPI.Controllers
             return Ok(news);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]/{title}")]
         [HttpGet("{title}")]
         public ActionResult GetNewsByTitle(String title)
@@ -40,6 +44,7 @@ namespace ProyectoAPI.Controllers
             return Ok(news);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]/{id}")]
         [HttpGet("{id}")]
         public ActionResult GetNewsById(int id)
@@ -52,6 +57,7 @@ namespace ProyectoAPI.Controllers
             return Ok(news);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]")]
         [HttpPost]
         public IActionResult PostNews(News news)
@@ -74,6 +80,7 @@ namespace ProyectoAPI.Controllers
             return Ok(newsResult);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]")]
         [HttpPut]
         public IActionResult PutNews(News news)
@@ -95,6 +102,7 @@ namespace ProyectoAPI.Controllers
             return Ok(newsResult);
         }
 
+        [EnableCors("GetAllPolicy")]
         [Route("[action]/{id}")]
         [HttpDelete("{id}")]
         public ActionResult DeleteNews(int id)
